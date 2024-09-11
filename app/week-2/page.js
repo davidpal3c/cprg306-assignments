@@ -2,7 +2,7 @@ import StudentInfo from "./student-info";
 
 export default function Page() {
   return (
-    <section className="flex flex-col p-5 h-64 items-center justify-center w-64 border">
+    <section className="h-screen flex flex-col items-center justify-center">
       <h1>Shopping List</h1>
       <StudentInfo />
     </section>
