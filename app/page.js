@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+const buttonStyle = "flex justify-center w-64 border-2 rounded-lg p-2 mt-6 border-indigo-200 border-b-indigo-500 bg-indigo-700 transition-colors duration-400 hover:bg-indigo-600 hover:bg-opacity-50";
+const buttonInnerStyle = "text-teal-500 hover:text-teal-300";
+
+
 export default function Home() {
   return (
     <main className="h-screen flex flex-col items-center justify-center">
@@ -8,12 +12,16 @@ export default function Home() {
       </h1>
       <ul className="m-8">
         <li>
-          <div className="flex justify-center w-64 border-2 rounded-lg p-2 mt-6 border-indigo-200 border-b-indigo-500 bg-indigo-700 transition-colors duration-400 hover:bg-indigo-600 hover:bg-opacity-50">
-            <Link
-              className="text-teal-500 hover:text-teal-300"
-              href="./week-2/"
-            >
+          <div className={buttonStyle}>
+            <Link href="./week-2/" className={buttonInnerStyle}>
               Week 2 Assignment
+            </Link>
+          </div>
+        </li>
+        <li>
+          <div className={buttonStyle}>
+            <Link href="./week-3/" className={buttonInnerStyle}>
+              Week 3 Assignment
             </Link>
           </div>
         </li>
@@ -21,3 +29,6 @@ export default function Home() {
     </main>
   );
 }
+
+
+
