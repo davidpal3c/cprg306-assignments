@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const buttonStyle = "flex justify-center w-64 border-2 rounded-lg p-2 mt-6 border-indigo-200 border-b-indigo-500 bg-indigo-700 transition-colors duration-400 hover:bg-indigo-600 hover:bg-opacity-50";
+const buttonStyle = "flex justify-center w-64 border-2 rounded-lg p-2 mt-5 border-indigo-200 border-b-indigo-500 bg-indigo-700 transition-colors duration-400 hover:bg-indigo-600 hover:bg-opacity-50";
 const buttonInnerStyle = "text-teal-500 hover:text-teal-300";
 
 
