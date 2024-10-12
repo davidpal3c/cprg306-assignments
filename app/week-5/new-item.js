@@ -5,14 +5,11 @@ import { useState } from "react";
 
 export default function NewItemPage() {
 
-    const categoriesArr = ["Produce", "Dairy", "Bakery", "Meat", "Frozen Foods", "Canned Goods", "Dry Goods", "Beverages", "Snacks", "Household", "Other"]; 
-
-    // const mapCat = () => categoriesArr.map()
-
+    const categories = ["Produce", "Dairy", "Bakery", "Meat", "Frozen Foods", "Canned Goods", "Dry Goods", "Beverages", "Snacks", "Household", "Other"]; 
     
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState(1);
-    const [category, setCategory] = useState(categoriesArr[0]);
+    const [selectedCategory, setSelectedCategory] = useState("");
 
 
     const increment = () => {
@@ -29,21 +26,17 @@ export default function NewItemPage() {
         }
     }
 
-
     const handleName = (event) => setName(event.target.value);
-    // const handleQuantity = (event) => setName(event.target.value);
-    const handleCategory = (event) => setCategory(event.target.value);
+    const handleCategory = (event) => setSelectedCategory(event.target.value);
 
-
-    //handle quantity
-    //handle category
     
-    const submitForm = (event) => {
+    const submitForm = (event) => {        
+        event.preventDefault();
 
         let basket = {
             name: name,
             quantity: quantity,
-            category: category
+            category: selectedCategory
         }
 
         alert(`
@@ -52,53 +45,45 @@ export default function NewItemPage() {
                 Category: ${basket.category}`)
 
         setName("");
-        setQuantity("");
-        setCategory("");
+        setQuantity(1);
+        setSelectedCategory("");
     }
 
 
     return(
-        <div className="flex justify-evenly w-96 rounded-lg p-2 mt-6 items-center border-indigo-200 bg-blue-800 transition-colors duration-400 ">
-            
-            <form onSubmit={submitForm} className="p-2 m-4 bg-blue-900 text-black max-w-sm w-full">
-
+        <div className="flex justify-evenly w-fit rounded-lg mt-6 items-center border-indigo-200 bg-slate-600 transition-colors duration-400 ">         
+            <form onSubmit={submitForm} className="p-3 m-4 bg-slate-400 text-zinc-900 max-w-sm w-full rounded-lg">
                 <div className="mb-2">
-                    <input onChange={handleName} type="text" className="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans" placeholder="Item name"/>
+                    <input onChange={handleName} value={name} type="text" className="w-full mt-2 border-2 border-gray-300 p-2 rounded-lg font-sans" placeholder="Item name"/>
                 </div>
-
-
-                <div className="flex flex-row justify-evenly">
-                    <div className="flex items-center border">
-                        <p className="text-2xl mr-5 font-sans">{quantity}</p>
-                        <div className="bg-slate-600 w-8 flex justify-center mr-5 rounded-md hover:bg-indigo-600 hover:bg-opacity-50 hover:text-amber-500 cursor-pointer" onClick={decrement}>
-                            <button type="button" onClick={decrement} className="text-4xl"> - </button>
+                <div className="flex flex-row justify-between items-center m-4 mt-4">
+                    <div className="flex justify-center items-center border-2 border-gray-300 p-1 rounded-lg w-64 h-10 mt-1 mr-4 font-sans bg-slate-100">
+                        <label className="text-neutral-500">Quantity: </label>
+                        
+                        <p className="text-2sm ml-4 mr-4 font-sans">{quantity}</p>
+                        <div className="bg-sky-600 w-7 h-7 flex justify-center items-center mr-2 rounded-md hover:bg-amber-500 hover:bg-opacity-50 cursor-pointer" onClick={decrement}>
+                            <button type="button" onClick={decrement} className="text-2xl text-emerald-200"> - </button>
                         </div>
-                        <div className="bg-slate-600 w-8 flex justify-center mr-5 rounded-md hover:bg-indigo-600 hover:bg-opacity-50 hover:text-amber-500 cursor-pointer" onClick={increment}>
-                            <button type="button" onClick={increment} className="text-4xl"> + </button>
+                        <div className="bg-sky-600 w-7 h-7 flex justify-center items-center mr-2 rounded-md hover:bg-amber-500 hover:bg-opacity-50 hover:text-amber-500 cursor-pointer" onClick={increment}>
+                            <button type="button" onClick={increment} className="text-2xl text-emerald-200"> + </button>
                         </div>
                     </div>
 
                     <div className="w-36">
-                        <select onChange={handleCategory} className="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans">
+                        <select value={selectedCategory} onChange={handleCategory} className="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans">
                             <option value="" disabled=""> Category</option>
-                            <option value="produce">Produce</option>
-                            <option value="dairy">Dairy</option>
-                            <option value="bakery">Bakery</option>
-                            <option value="meat">Meat</option>
-                            <option value="frozen foods">Frozen Foods</option>
-                            <option value="canned goods">Canned Goods</option>
-                            <option value="dry goods">Dry Goods</option>
-                            <option value="beverages">Beverages</option>
-                            <option value="snacks">Snacks</option>
-                            <option value="household">Household</option>
-                            <option value="other">Other</option>
+                            {categories.map((category, index) => (
+                                <option key={index} value={category.toLowerCase()}>
+                                    {category}
+                                </option>
+                            ))}
                         </select>
                     </div>
 
                 </div>
 
                 <div>
-                    <button className="bg-yellow-500 border w-24 h-7"></button>
+                    <button className="bg-amber-600 w-24 h-7 rounded-lg text-zinc-900 hover:bg-amber-500 hover:bg-sky-600 active:bg-sky-300">Submit</button>
                 </div>
 
             </form>
