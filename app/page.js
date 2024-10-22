@@ -39,6 +39,13 @@ export default function Home() {
             </Link>
           </div>
         </li>
+        <li>
+          <div className={buttonStyle}>
+            <Link href="./week-6/" className={buttonInnerStyle}>
+              Week 6 Assignment
+            </Link>
+          </div>
+        </li>
       </ul>
     </main>
   );
