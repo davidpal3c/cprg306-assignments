@@ -33,7 +33,7 @@ export default function NewItem({ onAddItem }) {
     const randomString = (length) => {
         let result = "";
         const totalChars = characters.length;
-        for (let i = o; i < length; i++) {
+        for (let i = 0; i < length; i++) {
             result += characters.charAt(Math.floor(Math.random() * totalChars));           
         }
 
@@ -46,12 +46,13 @@ export default function NewItem({ onAddItem }) {
         event.preventDefault();
 
         let item = {
-            id: randomString,
+            id: randomString(16),
             name: name,
             quantity: quantity,
             category: selectedCategory
         }
 
+        console.log(randomString());
         // alert(`
         //         Name: ${item.name}, 
         //         Quantity: ${item.quantity}, 
