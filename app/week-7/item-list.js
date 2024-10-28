@@ -10,7 +10,7 @@ export default function ItemList({ items }) {
 
     //using spread operator to avoid altering original array (as an anonymous array?)
     
-    const [basket, setBasket] = useState(items);
+    // const [basket, setBasket] = useState(items);
     
     const sortedItems = [...items].sort((a, b) => {
         let comparison = 0;
@@ -37,6 +37,8 @@ export default function ItemList({ items }) {
         }
     };
 
+    // console.log(`basket  ${basket.map(item => item.name)}`);
+
     return (
         <main>
             <div className="flex flex-row mt-8">
@@ -56,8 +58,8 @@ export default function ItemList({ items }) {
                     </button>
                 </div>
             </div>
-            {sortedItems.map((basket) => (
-                <Item key={basket.id} itemObj={basket} />        
+            {sortedItems.map((items) => (
+                <Item key={items.id} itemObj={items} />        
             ))}
         </main>
     );

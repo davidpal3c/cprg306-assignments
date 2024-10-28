@@ -45,6 +45,12 @@ export default function NewItem({ onAddItem }) {
     const submitForm = (event) => {        
         event.preventDefault();
 
+
+        if (!selectedCategory) {
+            alert("Please select a category.")
+            return;
+        }
+
         let item = {
             id: randomString(16),
             name: name,
@@ -52,7 +58,6 @@ export default function NewItem({ onAddItem }) {
             category: selectedCategory
         }
 
-        console.log(randomString());
         // alert(`
         //         Name: ${item.name}, 
         //         Quantity: ${item.quantity}, 
