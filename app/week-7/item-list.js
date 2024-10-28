@@ -2,14 +2,16 @@
 
 import { useState } from "react";
 import Item from "./item";
-import items from "./items.json";
 
-export default function ItemList() {
+export default function ItemList({ items }) {
     const [sortBy, setSortBy] = useState("name");
     const [sortOrder, setSortOrder] = useState("asc");
 
 
     //using spread operator to avoid altering original array (as an anonymous array?)
+    
+    const [basket, setBasket] = useState(items);
+    
     const sortedItems = [...items].sort((a, b) => {
         let comparison = 0;
 
@@ -54,8 +56,8 @@ export default function ItemList() {
                     </button>
                 </div>
             </div>
-            {sortedItems.map((item) => (
-                <Item key={item.id} itemObj={item} />        
+            {sortedItems.map((basket) => (
+                <Item key={basket.id} itemObj={basket} />        
             ))}
         </main>
     );
