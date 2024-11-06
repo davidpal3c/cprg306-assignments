@@ -34,7 +34,6 @@ export default function Page() {
         if (text[0].endsWith("s")) {
             text.slice(0, -1);
         }
-
         return text;
 
     }
@@ -46,7 +45,7 @@ export default function Page() {
                 <NewItem onAddItem={handleAddItem}/>
                 <ItemList items={itemsData} onItemSelect={handleItemSelect}/>
             </div>
-            <div className="border border-lime-400 w-full ml-12">
+            <div className="border border-lime-400 w-full ml-12 my-32">
                 <MealIdeas ingredient={selectedItemName}/>
             </div>
 
