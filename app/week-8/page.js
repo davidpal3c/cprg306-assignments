@@ -35,8 +35,12 @@ export default function Page() {
             text.slice(0, -1);
         }
         return text;
-
     }
+
+    // const handleIngredientSelect = (recipe) => {
+    //     setSelectedRecipe(recipe);
+    // }
+
 
     return(
         <main className="flex flex-row w-full mx-12">
@@ -45,7 +49,7 @@ export default function Page() {
                 <NewItem onAddItem={handleAddItem}/>
                 <ItemList items={itemsData} onItemSelect={handleItemSelect}/>
             </div>
-            <div className="border border-lime-400 w-full ml-12 my-32">
+            <div className="border border-amber-400 w-full ml-12 my-32 rounded-md">
                 <MealIdeas ingredient={selectedItemName}/>
             </div>
 
