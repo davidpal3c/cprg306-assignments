@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore"; 
  
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -14,7 +15,22 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
  
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const firebaseConfig2 = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY_2,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN_2,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID_2,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET_2,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID_2,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID_2,
+}
+
+// Initialize Firebase for authentication (config1)
+const app = initializeApp(firebaseConfig, "authApp");
+
+// Initialize Firebase for Firestore (config2)
+const app2 = initializeApp(firebaseConfig2, "firestoreApp");
+
 export const auth = getAuth(app);
 
+// Db initialization
+export const db = getFirestore(app2);

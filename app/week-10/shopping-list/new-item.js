@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react";
+import { useUserAuth } from "../_utils/auth_context";
+
 
 
 export default function NewItem({ onAddItem }) {
@@ -10,7 +12,7 @@ export default function NewItem({ onAddItem }) {
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [selectedCategory, setSelectedCategory] = useState("");
-
+    const { user } = useUserAuth();
 
     const increment = () => {
         let currentQuantity = quantity;
@@ -29,19 +31,6 @@ export default function NewItem({ onAddItem }) {
     const handleName = (event) => setName(event.target.value);
     const handleCategory = (event) => setSelectedCategory(event.target.value);
 
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const randomString = (length) => {
-        let result = "";
-        const totalChars = characters.length;
-        for (let i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * totalChars));           
-        }
-
-        // const result = Math.random().toString(36).substring(2,7);
-        return result;
-    }
-
-
     const submitForm = (event) => {        
         event.preventDefault();
 
@@ -52,16 +41,11 @@ export default function NewItem({ onAddItem }) {
         }
 
         let item = {
-            id: randomString(16),
+            id: user.uid,
             name: name,
             quantity: quantity,
             category: selectedCategory
         }
-
-        // alert(`
-        //         Name: ${item.name}, 
-        //         Quantity: ${item.quantity}, 
-        //         Category: ${item.category}`)
         
         onAddItem(item);
         setName("");

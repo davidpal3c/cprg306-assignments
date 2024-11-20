@@ -7,23 +7,19 @@ export default function ItemList({ items, onItemSelect }) {
     const [sortBy, setSortBy] = useState("name");
     const [sortOrder, setSortOrder] = useState("asc");
 
-
-    //using spread operator to avoid altering original array (as an anonymous array?)
     
-    // const [basket, setBasket] = useState(items);
-    
-    const sortedItems = [...items].sort((a, b) => {
+    const sortedItems = [...(items || [])].sort((a, b) => {         // default to empty if items is undefined or null 
         let comparison = 0;
-
-        if (sortBy === "name") {
-            comparison = a.name.localeCompare(b.name);
+   
+        if (sortBy === "name") {                                    //guarding against undefined properties
+            comparison = (a.name || "").localeCompare(b.name || "");
         } 
         else if (sortBy === "quantity") {
-            comparison = a.quantity - b.quantity;
+            comparison = (a.quantity || 0) - (b.quantity || 0);
         }            
         else {
-            comparison = a.category.localeCompare(b.category);
-        }      
+            comparison = (a.category || "").localeCompare(b.category || "");
+        }   
 
         return sortOrder === "asc" ? comparison : -comparison;
     });
@@ -59,9 +55,13 @@ export default function ItemList({ items, onItemSelect }) {
                 </div>
             </div>
             <div className="">
-                {sortedItems.map((items) => (
-                    <Item key={items.id} itemObj={items} onSelect={onItemSelect}/>        
-                ))}
+                {sortedItems.length === 0 ? (
+                    <p>No items to display. Please add an ingredient to your list.</p>
+                ) : (
+                    sortedItems.map((items) => (
+                        <Item key={items.id} itemObj={items} onSelect={onItemSelect}/>        
+                    ))
+                )}
             </div>
 
         </main>

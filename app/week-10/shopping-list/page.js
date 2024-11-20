@@ -2,21 +2,22 @@
 
 import ItemList from "./item-list";
 import NewItem from "./new-item";
-import items from "./items.json";
+// import items from "./items.json";
 import { useState, useEffect } from "react";
 import MealIdeas from "./meal-ideas";
 import { useUserAuth } from "../_utils/auth_context";
 import Link from "next/link";
-import { useRouter } from "next/router";
-
+// import { useRouter } from "next/router";
+import { addItem, dbGetMyItems } from "../_services/shopping-list-service";
 
 
 export default function Page() {
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
     // const router = useRouter();
     
-    const [itemsData, setItemsData] = useState(items);
+    const [itemsData, setItemsData] = useState([]);
     const [selectedItemName, setSelectedItemName] = useState("");
+    
 
     //mounting state var to prevent useRouter loading on the server-side/checking if component is mounted
     const [isMounted, setIsMounted] = useState(false);
@@ -25,9 +26,31 @@ export default function Page() {
         setIsMounted(true);
     }, [])
 
+    useEffect(() => {
+        if(user?.uid) {
+            // addItem(user.uid);
+            dbGetMyItems(user.uid, setItemsData);
+        } else {
+            console.log("User not authenticated");
+        }
+    }, [user])
+    
+    //debugging log
+    console.log("Items data: ", itemsData);
+    console.log(user ? ("User id ",user.uid) : "user not logged in");
 
-    const handleAddItem = (item) => {
-        setItemsData([...itemsData, item])
+
+
+    const handleAddItem = async(newItem) => {
+
+        try {
+            await addItem(user.uid, newItem);
+            setItemsData((prevItems) => [...prevItems, newItem]);
+        } catch (error) {
+            console.log("error adding item: ", error);
+        }
+        
+
     }
     // console.log(itemsData);
 

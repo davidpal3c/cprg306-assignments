@@ -23,8 +23,10 @@ export default function LandingPage() {
         }
     }
 
-    // console.log(user);
-
+    if (user) {
+        console.log("User :", user.uid);
+    }
+    
     return(
         <main className="m-5">
             <header>
@@ -41,7 +43,7 @@ export default function LandingPage() {
                         
                     </div>
                     <div className="border border-amber-400 w-44 hover:bg-amber-600 hover:scale-105 p-1 items-center justify-center rounded transform transition-all duration-300">
-                        <Link href="/week-9/shopping-list">Go To Shopping List</Link>
+                        <Link href="/week-10/shopping-list">Go To Shopping List</Link>
                     </div>
                     <button 
                         type="button"
